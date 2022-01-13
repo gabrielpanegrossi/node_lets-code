@@ -5,15 +5,26 @@ port = 3000;
 
 
 app.get('/', function (req, res) {
-    res.send("There's a server here");
+    res.send({'message':"There's a server here"});
 });
 
+
+//Health
 app.get('/health', function (req, res) {
-    res.send("Hello you're healthy!");
+    res.status(200).send({'message':"Hello you're healthy!"});
 });
 
-app.get('/hello', function (req, res) {
-    res.send('Hello World!');
+//Items
+app.get('/usuario', function (req, res) {
+    res.status(200).send({'what':'Get items'});
+});
+
+app.post('/usuario', function (req, res) {
+    res.status(201).send({'what':'Post item'});
+});
+
+app.delete('/usuario', function (req, res) {
+    res.status(200).send({'what':'Delete item'});
 });
 
 app.listen(port, () => {
