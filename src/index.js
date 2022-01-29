@@ -1,32 +1,10 @@
-import express from 'express';
+const dotenv = require('dotenv');
+dotenv.config();
 
-const app = express(),
-port = 3000;
+const mongoose = require('mongoose');
 
-
-app.get('/', function (req, res) {
-    res.send({'message':"There's a server here"});
+mongoose.connect('mongodb://localhost:27017/', (err, res) => {
+	console.log('Mongo conectado com sucesso');
 });
 
-
-//Health
-app.get('/health', function (req, res) {
-    res.status(200).send({'message':"Hello you're healthy!"});
-});
-
-//Items
-app.get('/usuario', function (req, res) {
-    res.status(200).send({'what':'Get items'});
-});
-
-app.post('/usuario', function (req, res) {
-    res.status(201).send({'what':'Post item'});
-});
-
-app.delete('/usuario', function (req, res) {
-    res.status(200).send({'what':'Delete item'});
-});
-
-app.listen(port, () => {
-    console.log(`Server is listening at http://localhost:${port}`)
-})
+require('./server');
