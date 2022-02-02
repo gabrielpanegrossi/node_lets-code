@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const router = Router();
 
-const { login } = require('../model/');
+const { registerCustomer } = require('../model/');
 
 //movimentacoes CRUD
 router.get('/information', (req, res) => {
@@ -10,9 +10,9 @@ router.get('/information', (req, res) => {
 	res.status(200).send(returnReq);
 });
 
-router.post('/login', async function (req, res) {
+router.post('/user', async function (req, res) {
 	const { user, password } = req.body;
-	const returnReq = await login(user, password);
+	const returnReq = await registerCustomer(user, password);
 	res.status(201).send(returnReq);
 });
 
