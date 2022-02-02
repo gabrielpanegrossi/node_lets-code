@@ -1,5 +1,9 @@
 const express = require('express');
-const { customerRoutes, movRoutes } = require('./routes');
+const {
+	customerRoutes,
+	movRoutes,
+	customerRegisterRoutes,
+} = require('./routes');
 const { engine } = require('express-handlebars');
 const { PORT } = require('./config');
 
@@ -18,6 +22,7 @@ server.use(sucessHandler);
 // Router routes
 server.use('/user', customerRoutes);
 server.use('/movimentacoes', movRoutes);
+server.use('/register', customerRegisterRoutes);
 
 server.use(express.static('public'));
 
