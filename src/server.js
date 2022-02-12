@@ -3,6 +3,7 @@ const {
 	customerRoutes,
 	movRoutes,
 	customerRegisterRoutes,
+	receipts,
 } = require('./routes');
 const { engine } = require('express-handlebars');
 const { PORT } = require('./config');
@@ -10,10 +11,12 @@ const { PORT } = require('./config');
 const server = express();
 
 // Server middlewares
+const fileUpload = require('express-fileupload');
 const middJson = express.json();
 const logger = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const sucessHandler = require('./middlewares/sucessMiddleware');
+server.use(fileUpload());
 server.use(middJson);
 server.use(logger);
 server.use(errorHandler);
@@ -23,6 +26,7 @@ server.use(sucessHandler);
 server.use('/user', customerRoutes);
 server.use('/movimentacoes', movRoutes);
 server.use('/register', customerRegisterRoutes);
+server.use('/receipts', receipts);
 
 server.use(express.static('public'));
 
